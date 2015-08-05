@@ -238,34 +238,24 @@ var BinaryAjax = (function() {
 
 }());
 
-/*
-document.write(
-	"<script type='text/vbscript'>\r\n"
-	+ "Function IEBinary_getByteAt(strBinary, iOffset)\r\n"
-	+ "	IEBinary_getByteAt = AscB(MidB(strBinary,iOffset+1,1))\r\n"
-	+ "End Function\r\n"
-	+ "Function IEBinary_getLength(strBinary)\r\n"
-	+ "	IEBinary_getLength = LenB(strBinary)\r\n"
-	+ "End Function\r\n"
-	+ "</script>\r\n"
-);
-*/
-
-document.write(
-	"<script type='text/vbscript'>\r\n"
-	+ "Function IEBinary_getByteAt(strBinary, iOffset)\r\n"
+var script = document.createElement("script");
+script.type = "text/vbscript";
+script.innerHTML = "Function IEBinary_getByteAt(strBinary, iOffset)\r\n"
 	+ "	IEBinary_getByteAt = AscB(MidB(strBinary, iOffset + 1, 1))\r\n"
 	+ "End Function\r\n"
 	+ "Function IEBinary_getBytesAt(strBinary, iOffset, iLength)\r\n"
 	+ "  Dim aBytes()\r\n"
 	+ "  ReDim aBytes(iLength - 1)\r\n"
 	+ "  For i = 0 To iLength - 1\r\n"
-	+ "   aBytes(i) = IEBinary_getByteAt(strBinary, iOffset + i)\r\n"  
+	+ "   aBytes(i) = IEBinary_getByteAt(strBinary, iOffset + i)\r\n"
 	+ "  Next\r\n"
-	+ "  IEBinary_getBytesAt = aBytes\r\n" 
+	+ "  IEBinary_getBytesAt = aBytes\r\n"
 	+ "End Function\r\n"
 	+ "Function IEBinary_getLength(strBinary)\r\n"
 	+ "	IEBinary_getLength = LenB(strBinary)\r\n"
-	+ "End Function\r\n"
-	+ "</script>\r\n"
-);
+	+ "End Function\r\n";
+
+
+document.head.appendChild(script);
+
+module.exports = BinaryAjax;
